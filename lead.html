@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <title>알뜰폰 신청</title>
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1; /* 배경이 콘텐츠 뒤에 위치하도록 */
+        background-color: #f0f4f7; /* 어두운 배경 */
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+      .button {
+        display: inline-block;
+        width: 200px; /* 버튼 크기 설정 */
+        height: 50px; /* 버튼 높이 설정 */
+        background-color: white; /* 배경 흰색 */
+        border: 2px solid gray; /* 테두리 회색 */
+        border-radius: 12px; /* 테두리 둥글게 */
+        color: black; /* 글자 색상 */
+        text-align: center; /* 텍스트 가운데 정렬 */
+        line-height: 46px; /* 버튼 높이에 맞춰 텍스트 가운데 정렬 */
+        cursor: pointer; /* 커서 모양 변경 */
+        margin: 10px; /* 버튼 간격 */
+        transition: background-color 0.3s, box-shadow 0.3s; /* 마우스 오버 시 효과 */
+      }
+
+      .button:hover {
+        background-color: #f0f0f0; /* 마우스 오버 시 배경색 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 마우스 오버 시 그림자 */
+      }
+
+      /* <p> 태그 스타일 */
+      p {
+        color: gray; /* 글자 색상 회색 */
+        font-size: 14px; /* 글자 크기 */
+        line-height: 1.6; /* 줄 간격 */
+      }
+
+      /* 컨테이너 스타일 (중앙 정렬을 위한 추가 스타일) */
+      .container {
+        text-align: center;
+        margin: 100px auto;
+        max-width: 600px; /* 최대 너비 제한 */
+      }
+      h1 {
+        text-align: center;
+      }
+      .hidden {
+        display: none;
+      }
+      .button {
+        display: inline-block;
+        margin: 5px 0;
+        color: rgb(84, 84, 84);
+        background-color: white;
+        border: 1px solid rgb(84, 84, 84);
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .submitbutton {
+        padding: 12px 20px; /* 버튼 내부 여백 */
+        font-size: 16px; /* 버튼 글자 크기 */
+        background-color: rgb(29, 151, 212); /* 버튼 배경색 */
+        color: white; /* 버튼 텍스트 색 */
+        border: none; /* 테두리 제거 */
+        border-radius: 8px; /* 버튼 테두리 둥글게 */
+        cursor: pointer; /* 마우스 포인터를 손 모양으로 변경 */
+        width: 100%; /* 버튼 가로 길이 꽉 채우기 */
+      }
+
+      .submitbutton:hover {
+        background-color: rgb(25, 125, 175); /* 버튼 hover 시 색 변경 */
+      }
+      .button:hover {
+        background-color: lightslategray;
+      }
+      .input-field {
+        margin-bottom: 20px; /* 각 input 필드 간의 간격을 띄움 */
+      }
+
+      .input-field label {
+        display: block; /* 레이블을 블록 요소로 만들어서 input 아래에 표시 */
+        margin-bottom: 8px; /* 레이블과 input 간의 간격 */
+        font-size: 16px;
+      }
+
+      .input-field input {
+        width: 80%; /* 입력 필드 가로 길이 꽉 채움 */
+        padding: 10px; /* 내부 여백 */
+        font-size: 16px; /* 글자 크기 */
+        border-radius: 8px; /* 둥근 테두리 */
+        border: 1px solid #ccc; /* 연한 회색 테두리 */
+        box-sizing: border-box; /* 테두리와 패딩을 포함한 크기 설정 */
+      }
+      .input-field textarea {
+        width: 100%; /* 가로 길이 꽉 채우기 */
+        height: 120px; /* 세로 길이 설정 */
+        padding: 10px; /* 내부 여백 */
+        font-size: 16px; /* 글자 크기 */
+        border-radius: 8px; /* 둥근 테두리 */
+        border: 1px solid #ccc; /* 연한 회색 테두리 */
+        box-sizing: border-box; /* 테두리와 패딩을 포함한 크기 설정 */
+        resize: vertical; /* 세로로만 크기 조절 가능 */
+      }
+      label {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      input[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #218838;
+      }
+    </style>
+    <script>
+      AOS.init({ duration: 1200 });
+    </script>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div class="container" data-aos="zoom-in">
+      <h1>알뜰폰 신청</h1>
+      <div id="step1">
+        <h2>1. 현재 사용중인 통신사를 알려주세요</h2>
+        <p>맞춤 요금제 추천에 활용해요</p>
+        <button class="button" onclick="selectCarrier('KT')">KT</button>
+        <button class="button" onclick="selectCarrier('SKT')">SKT</button>
+        <button class="button" onclick="selectCarrier('LG U+')">LG U+</button>
+      </div>
+
+      <div id="step2" class="hidden">
+        <h2>2. 원하시는 요금제 가격을 선택해주세요</h2>
+        <p>맞춤 요금제 추천에 활용해요</p>
+        <button class="button" onclick="selectPrice('7900')">~7900</button>
+        <button class="button" onclick="selectPrice('19000')">~19000</button>
+        <button class="button" onclick="selectPrice('39000')">~39000</button>
+        <button class="button" onclick="selectPrice('65000')">~65000</button>
+      </div>
+
+      <div id="step3" class="hidden">
+        <h2>3. 통신사 약정이 얼마나 남아있으신가요?</h2>
+        <p>맞춤 요금제 추천에 활용해요</p>
+        <button class="button" onclick="selectContract('0')">
+          약정이 없어요
+        </button>
+        <button class="button" onclick="selectContract('6')">6개월 미만</button>
+        <button class="button" onclick="selectContract('12')">6-12 개월</button>
+        <button class="button" onclick="selectContract('13')">
+          12개월 이상
+        </button>
+      </div>
+
+      <div id="step4" class="hidden">
+        <h2>4. 인터넷 또는 가족결합이 되어있나요?</h2>
+        <p>맞춤 요금제 추천에 활용해요</p>
+        <button class="button" onclick="selectBundle('Yes')">Yes</button>
+        <button class="button" onclick="selectBundle('No')">No</button>
+      </div>
+
+      <div id="step5" class="hidden">
+        <h2>5. 알뜰폰 요금제에 대해 얼마나 알고 계신가요?</h2>
+        <p>맞춤 요금제 추천에 활용해요</p>
+        <button class="button" onclick="selectAwareness('알뜰폰 고수에요')">
+          알뜰폰 고수에요
+        </button>
+        <button class="button" onclick="selectAwareness('A lot')">
+          검색해봐서 어느 정도 알고 있어요
+        </button>
+        <button
+          class="button"
+          onclick="selectAwareness('들어봤지만 자세히 알진 못해요')"
+        >
+          들어봤지만 자세히 알진 못해요
+        </button>
+        <button class="button" onclick="selectAwareness('No')">
+          전혀 몰라요
+        </button>
+      </div>
+
+      <div id="finalStep" class="hidden">
+        <div class="input-field">
+          <label for="inquiries">문의내용:</label>
+          <textarea id="inquiries" name="inquiries" rows="4"></textarea>
+          <!-- 세로 길이 늘리기 위해 textarea 사용 -->
+        </div>
+        <button class="button" onclick="selectLeadOrCase('상담문의')">
+          상담문의
+        </button>
+        <button class="button" onclick="selectLeadOrCase('요금제 보기')">
+          요금제 보기
+        </button>
+      </div>
+
+      <div id="infoStep" class="hidden">
+        <h2>Submit Your Information</h2>
+        <form id="submitForm">
+          <div class="input-field">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="input-field">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div class="input-field">
+            <label for="email">Email:</label>
+            <input type="email" id="email2" name="email2" required />
+          </div>
+          <button
+            class="submitbutton"
+            type="button"
+            onclick="handleFormSubmit()"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <form
+      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DdL00000HDyle"
+      method="POST"
+      id="hiddenSubmitForm"
+      style="display: none"
+    >
+      <input type="hidden" name="oid" value="00DdL00000HDyle" />
+      <input type="hidden" name="retURL" value="http://example.com" />
+
+      <!-- 숨겨진 폼의 입력 필드 -->
+      <label for="first_name">First Name</label>
+      <input
+        id="first_name"
+        maxlength="40"
+        name="first_name"
+        size="20"
+        type="text"
+      /><br />
+      <label for="last_name">Last Name</label>
+      <input
+        id="last_name"
+        maxlength="80"
+        name="last_name"
+        size="20"
+        type="text"
+      /><br />
+      <label for="email">Email</label>
+      <input
+        id="email"
+        maxlength="80"
+        name="email"
+        size="20"
+        type="text"
+      /><br />
+      <label for="mobile">Mobile</label>
+      <input
+        id="mobile"
+        maxlength="40"
+        name="mobile"
+        size="20"
+        type="text"
+      /><br />
+      teleName:<input
+        id="00NdL00000BKFar"
+        maxlength="255"
+        name="00NdL00000BKFar"
+        size="20"
+        type="text"
+      /><br />
+      telePrice:<input
+        id="00NdL00000BK6JS"
+        name="00NdL00000BK6JS"
+        size="20"
+        type="text"
+      /><br />
+      remainDate:<input
+        id="00NdL00000BKGTh"
+        name="00NdL00000BKGTh"
+        size="20"
+        type="text"
+      /><br />
+      InternetConnect:<input
+        id="00NdL00000BKGBx"
+        name="00NdL00000BKGBx"
+        type="checkbox"
+        value="1"
+      /><br />
+      Inquiries:<textarea
+        id="00NdL00000BKFZF"
+        name="00NdL00000BKFZF"
+        type="text"
+        wrap="soft"
+      ></textarea
+      ><br />
+      <input type="submit" name="fsubmit" />
+    </form>
+    <script>
+      const userData = {};
+
+      function selectCarrier(carrier) {
+        userData.carrier = carrier;
+        document.getElementById("step1").classList.add("hidden");
+        document.getElementById("step2").classList.remove("hidden");
+      }
+
+      function selectPrice(price) {
+        userData.price = price;
+        document.getElementById("step2").classList.add("hidden");
+        document.getElementById("step3").classList.remove("hidden");
+      }
+
+      function selectContract(contract) {
+        userData.contractRemaining = contract;
+        document.getElementById("step3").classList.add("hidden");
+        document.getElementById("step4").classList.remove("hidden");
+      }
+
+      function selectBundle(bundle) {
+        userData.bundle = bundle;
+        document.getElementById("step4").classList.add("hidden");
+        document.getElementById("step5").classList.remove("hidden");
+      }
+
+      function selectAwareness(awareness) {
+        userData.awareness = awareness;
+        document.getElementById("step5").classList.add("hidden");
+        document.getElementById("finalStep").classList.remove("hidden");
+      }
+
+      function selectLeadOrCase(LOC) {
+        userData.LOC = LOC;
+        userData.inquiries = document.getElementById("inquiries").value;
+        document.getElementById("finalStep").classList.add("hidden");
+        document.getElementById("infoStep").classList.remove("hidden");
+      }
+
+      function handleFormSubmit() {
+        const fullName = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const email = document.getElementById("email2").value;
+        const nameParts = fullName.split(" ");
+        const firstName = nameParts.slice(1).join(" ");
+        const lastName = nameParts[0];
+        document.getElementById("first_name").value = firstName;
+        document.getElementById("last_name").value = lastName;
+        document.getElementById("email").value = email;
+        document.getElementById("mobile").value = phone;
+        document.getElementById("00NdL00000BKFar").value = userData.carrier;
+        document.getElementById("00NdL00000BK6JS").value = userData.price;
+        document.getElementById("00NdL00000BKGTh").value =
+          userData.contractRemaining;
+        document.getElementById("00NdL00000BKGBx").checked =
+          userData.bundle === "Yes";
+        document.getElementById("00NdL00000BKFZF").value = userData.inquiries;
+        const form = document.getElementById("hiddenSubmitForm");
+
+        form.submit();
+        console.log("Form submitted.");
+      }
+
+      AOS.init();
+    </script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: "#0067A3",
+          },
+          shape: {
+            type: "circle",
+            stroke: {
+              width: 0,
+              color: "#000000",
+            },
+            polygon: {
+              nb_sides: 5,
+            },
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false,
+            },
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#E8F9FF",
+            opacity: 0.6,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200,
+            },
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse",
+            },
+            onclick: {
+              enable: true,
+              mode: "push",
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1,
+              },
+            },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3,
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4,
+            },
+            push: {
+              particles_nb: 4,
+            },
+            remove: {
+              particles_nb: 2,
+            },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
+</html>
