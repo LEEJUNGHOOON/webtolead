@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상담 요청</title>
+    <!-- 반드시 아래 META 태그를 포함 -->
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
@@ -11,14 +13,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
+      /* Particles 배경 */
       #particles-js {
         position: fixed;
         width: 100%;
         height: 100%;
         top: 0;
         left: 0;
-        z-index: -1; /* 배경이 콘텐츠 뒤에 위치하도록 */
-        background-color: #f0f4f7; /* 어두운 배경 */
+        z-index: -1;
+        background-color: #f0f4f7;
       }
       body {
         font-family: Arial, sans-serif;
@@ -26,124 +29,92 @@
         padding: 0;
         background-color: #f4f4f9;
       }
-      .button {
-        display: inline-block;
-        width: 200px; /* 버튼 크기 설정 */
-        height: 50px; /* 버튼 높이 설정 */
-        background-color: white; /* 배경 흰색 */
-        border: 2px solid gray; /* 테두리 회색 */
-        border-radius: 12px; /* 테두리 둥글게 */
-        color: black; /* 글자 색상 */
-        text-align: center; /* 텍스트 가운데 정렬 */
-        line-height: 46px; /* 버튼 높이에 맞춰 텍스트 가운데 정렬 */
-        cursor: pointer; /* 커서 모양 변경 */
-        margin: 10px; /* 버튼 간격 */
-        transition: background-color 0.3s, box-shadow 0.3s; /* 마우스 오버 시 효과 */
-      }
-
-      .button:hover {
-        background-color: #f0f0f0; /* 마우스 오버 시 배경색 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 마우스 오버 시 그림자 */
-      }
-
-      /* <p> 태그 스타일 */
-      p {
-        color: gray; /* 글자 색상 회색 */
-        font-size: 14px; /* 글자 크기 */
-        line-height: 1.6; /* 줄 간격 */
-      }
-
-      /* 컨테이너 스타일 (중앙 정렬을 위한 추가 스타일) */
       .container {
         text-align: center;
         margin: 100px auto;
-        max-width: 600px; /* 최대 너비 제한 */
+        max-width: 600px;
       }
-      h1 {
-        text-align: center;
+      h1,
+      h2 {
+        color: #333;
       }
       .hidden {
         display: none;
       }
       .button {
         display: inline-block;
-        margin: 5px 0;
-        color: rgb(84, 84, 84);
+        width: 200px;
+        height: 50px;
         background-color: white;
-        border: 1px solid rgb(84, 84, 84);
-        border-radius: 10px;
+        border: 2px solid gray;
+        border-radius: 12px;
+        color: black;
+        text-align: center;
+        line-height: 46px;
         cursor: pointer;
-      }
-      .submitbutton {
-        padding: 12px 20px; /* 버튼 내부 여백 */
-        font-size: 16px; /* 버튼 글자 크기 */
-        background-color: rgb(29, 151, 212); /* 버튼 배경색 */
-        color: white; /* 버튼 텍스트 색 */
-        border: none; /* 테두리 제거 */
-        border-radius: 8px; /* 버튼 테두리 둥글게 */
-        cursor: pointer; /* 마우스 포인터를 손 모양으로 변경 */
-        width: 100%; /* 버튼 가로 길이 꽉 채우기 */
-      }
-
-      .submitbutton:hover {
-        background-color: rgb(25, 125, 175); /* 버튼 hover 시 색 변경 */
+        margin: 10px;
+        transition: background-color 0.3s, box-shadow 0.3s;
       }
       .button:hover {
-        background-color: lightslategray;
+        background-color: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
-      .input-field {
-        margin-bottom: 20px; /* 각 input 필드 간의 간격을 띄움 */
-      }
-
-      .input-field label {
-        display: block; /* 레이블을 블록 요소로 만들어서 input 아래에 표시 */
-        margin-bottom: 8px; /* 레이블과 input 간의 간격 */
+      .submitbutton {
+        padding: 12px 20px;
         font-size: 16px;
-      }
-
-      .input-field input {
-        width: 80%; /* 입력 필드 가로 길이 꽉 채움 */
-        padding: 10px; /* 내부 여백 */
-        font-size: 16px; /* 글자 크기 */
-        border-radius: 8px; /* 둥근 테두리 */
-        border: 1px solid #ccc; /* 연한 회색 테두리 */
-        box-sizing: border-box; /* 테두리와 패딩을 포함한 크기 설정 */
-      }
-      .input-field textarea {
-        width: 100%; /* 가로 길이 꽉 채우기 */
-        height: 120px; /* 세로 길이 설정 */
-        padding: 10px; /* 내부 여백 */
-        font-size: 16px; /* 글자 크기 */
-        border-radius: 8px; /* 둥근 테두리 */
-        border: 1px solid #ccc; /* 연한 회색 테두리 */
-        box-sizing: border-box; /* 테두리와 패딩을 포함한 크기 설정 */
-        resize: vertical; /* 세로로만 크기 조절 가능 */
-      }
-      label {
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      input[type="text"],
-      input[type="email"],
-      input[type="tel"] {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-      }
-      input[type="submit"] {
-        background-color: #28a745;
+        background-color: rgb(29, 151, 212);
         color: white;
         border: none;
-        border-radius: 5px;
-        padding: 10px;
+        border-radius: 8px;
         cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
       }
-      input[type="submit"]:hover {
-        background-color: #218838;
+      .submitbutton:hover {
+        background-color: rgb(25, 125, 175);
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .input-field {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+      .input-field label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .input-field input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      .input-field select,
+      .input-field textarea {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+
+        border: 1px solid #ccc;
+        box-sizing: border-box;
       }
     </style>
     <script>
+      // AOS 초기화
       AOS.init({ duration: 1200 });
     </script>
   </head>
@@ -151,54 +122,85 @@
     <div id="particles-js"></div>
     <div class="container" data-aos="zoom-in">
       <h1>상담 요청</h1>
+
+      <!-- Step 1: 고객 유형 선택 -->
       <div id="step1">
-        <h2>1. 매장 종류를 선택해주세요</h2>
-        <button class="button" onclick="selectCategory('소상공인')">
-          소상공인
+        <h2>1. 고객 유형을 선택해주세요</h2>
+        <button class="button" onclick="selectCategory('개인사업자')">
+          개인사업자
         </button>
         <button class="button" onclick="selectCategory('프렌차이즈')">
           프렌차이즈
         </button>
       </div>
 
+      <!-- Step 2: POS 시스템 유무 -->
       <div id="step2" class="hidden">
-        <h2>2. POS 시스템이 필요하신가요?</h2>
+        <h2>2. POS 시스템이 있으신가요?</h2>
         <button class="button" onclick="selectPOS(true)">예</button>
         <button class="button" onclick="selectPOS(false)">아니요</button>
       </div>
 
+      <!-- Step 3: 관심 제품 선택 -->
       <div id="step3" class="hidden">
         <h2>3. 관심 있는 제품을 선택해주세요</h2>
-        <button class="button" onclick="selectProduct('서빙 로봇')">
-          서빙 로봇
+        <button class="button" onclick="selectProduct('서빙로봇')">
+          서빙로봇
         </button>
-        <button class="button" onclick="selectProduct('테이블 오더')">
-          테이블 오더
+        <button class="button" onclick="selectProduct('테이블오더')">
+          테이블오더
         </button>
       </div>
 
-      <div id="step4" class="hidden">
-        <h2>4. 매장 규모를 입력해주세요</h2>
-        <div class="input-field">
+      <!-- Step 4: 매장 규모 또는 지점 수 입력 -->
+      <!-- <div id="step4" class="hidden">
+        <h2>4. 정보를 입력해주세요</h2>
+        <div id="sizeField" class="input-field">
           <label for="size">매장 규모 (평수)</label>
-          <input type="text" id="size" />
+          <input type="text" id="size" placeholder="매장 규모 입력" />
         </div>
-        <div class="input-field">
-          <label for="locations">매장 개수</label>
-          <input type="text" id="locations" />
+        <div id="locationsField" class="input-field">
+          <label for="locations">지점 수</label>
+          <input type="text" id="locations" placeholder="지점 수 입력" />
         </div>
         <button class="button" onclick="nextStep(5)">다음</button>
+      </div> -->
+      <div id="step4" class="hidden">
+        <h2>4. 정보를 입력해주세요</h2>
+        <div id="sizeField">
+          <h3>매장 규모</h3>
+          <button class="button" onclick="selectSize(20)">20평 이하</button>
+          <button class="button" onclick="selectSize(50)">50평 이하</button>
+          <button class="button" onclick="selectSize(80)">80평 이하</button>
+          <button class="button" onclick="selectSize(100)">100평 이하</button>
+        </div>
+        <div id="locationsField" class="hidden">
+          <h3>지점 수</h3>
+          <button class="button" onclick="selectLocations(10)">
+            10개 이하
+          </button>
+          <button class="button" onclick="selectLocations(30)">
+            30개 이하
+          </button>
+          <button class="button" onclick="selectLocations(50)">
+            50개 이하
+          </button>
+          <button class="button" onclick="selectLocations(100)">
+            100개 이하
+          </button>
+        </div>
       </div>
 
+      <!-- Step 5: 연락처 정보 입력 -->
       <div id="step5" class="hidden">
         <h2>5. 연락처 정보를 입력해주세요</h2>
         <div class="input-field">
-          <label for="name">이름</label>
-          <input type="text" id="name" required />
+          <label for="company">회사명</label>
+          <input type="text" id="company" required />
         </div>
         <div class="input-field">
-          <label for="phone">전화번호</label>
-          <input type="tel" id="phone" required />
+          <label for="mobile">전화번호</label>
+          <input type="tel" id="mobile" required />
         </div>
         <div class="input-field">
           <label for="email">이메일</label>
@@ -208,77 +210,108 @@
       </div>
     </div>
 
+    <!-- 숨겨진 Web-to-Lead 폼 -->
     <form
       id="hiddenSubmitForm"
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DNS00000DBRrp"
+      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DNS00000DWs2b"
       method="POST"
       style="display: none"
     >
-      <input type="hidden" name="oid" value="00DNS00000DBRrp" />
-      <input type="hidden" name="retURL" value="http://salesforce.com" />
+      <input type="hidden" name="oid" value="00DNS00000DWs2b" />
+      <input
+        type="hidden"
+        name="retURL"
+        value="https://dreamorder-dev-ed.develop.my.site.com"
+      />
       <input type="hidden" id="sf_email" name="email" />
       <input type="hidden" id="sf_company" name="company" />
-      <input type="hidden" id="sf_phone" name="phone" />
-      <input type="hidden" id="sf_category" name="00NNS00000WftR7" />
-      <input type="hidden" id="sf_pos" name="00NNS00000WfvCn" />
-      <input type="hidden" id="sf_product" name="00NNS00000Wfvnt" />
-      <input type="hidden" id="sf_size" name="00NNS00000WfvxZ" />
-      <input type="hidden" id="sf_locations" name="00NNS00000Wfw5d" />
+      <input type="hidden" id="sf_phone" name="mobile" />
+      <input type="hidden" id="sf_category" name="00NNS00000X7KTd" />
+      <input type="hidden" id="sf_pos" name="00NNS00000X7Iy5" />
+      <input type="hidden" id="sf_product" name="00NNS00000X7HxB" />
+      <input type="hidden" id="sf_size" name="00NNS00000X7Jvm" />
+      <input type="hidden" id="sf_locations" name="00NNS00000X720h" />
     </form>
 
     <script>
+      // 전역 객체에 사용자 입력 데이터를 저장할 변수
       const userData = {};
 
+      // Step 1: 고객 유형 선택
       function selectCategory(category) {
         userData.category = category;
-        nextStep(2);
+        document.getElementById("step1").classList.add("hidden");
+        // 개인사업자일 경우 매장 규모 입력, 프렌차이즈일 경우 지점 수 입력
+        if (category === "개인사업자") {
+          document.getElementById("sizeField").style.display = "block";
+          document.getElementById("locationsField").style.display = "none";
+        } else if (category === "프렌차이즈") {
+          document.getElementById("sizeField").style.display = "none";
+          document.getElementById("locationsField").style.display = "block";
+        }
+        document.getElementById("step2").classList.remove("hidden");
       }
 
+      // Step 2: POS 시스템 유무 선택
       function selectPOS(pos) {
         userData.pos = pos ? "1" : "";
-        nextStep(3);
+        document.getElementById("step2").classList.add("hidden");
+        document.getElementById("step3").classList.remove("hidden");
       }
 
+      // Step 3: 관심 제품 선택
       function selectProduct(product) {
         userData.product = product;
-        nextStep(4);
+        document.getElementById("step3").classList.add("hidden");
+        document.getElementById("step4").classList.remove("hidden");
+      }
+      function selectSize(size) {
+        userData.size = size;
+        document.getElementById("step4").classList.add("hidden");
+        document.getElementById("step5").classList.remove("hidden");
+      }
+      function selectLocations(location) {
+        userData.location = location;
+        document.getElementById("step4").classList.add("hidden");
+        document.getElementById("step5").classList.remove("hidden");
       }
 
+      // Step 4: 다음 단계로 이동
       function nextStep(step) {
-        document
-          .querySelectorAll(".container > div:not(#particles-js)")
-          .forEach((div) => div.classList.add("hidden"));
-        document.getElementById(`step${step}`).classList.remove("hidden");
+        for (let i = 1; i <= 5; i++) {
+          document.getElementById("step" + i).classList.add("hidden");
+        }
+        document.getElementById("step" + step).classList.remove("hidden");
       }
 
+      // Step 5: 제출 (숨겨진 폼에 값 채워서 제출)
       function submitForm() {
-        if (
-          !document.getElementById("name").value ||
-          !document.getElementById("phone").value ||
-          !document.getElementById("email").value
-        ) {
-          alert("모든 필드를 입력해주세요.");
+        const company = document.getElementById("company").value;
+        const mobile = document.getElementById("mobile").value;
+        const email = document.getElementById("email").value;
+        if (!company || !mobile || !email) {
+          alert("모든 연락처 정보를 입력해주세요.");
           return;
         }
-
-        document.getElementById("sf_email").value =
-          document.getElementById("email").value;
-        document.getElementById("sf_company").value =
-          document.getElementById("name").value;
-        document.getElementById("sf_phone").value =
-          document.getElementById("phone").value;
-        document.getElementById("sf_category").value = userData.category;
-        document.getElementById("sf_pos").value = userData.pos;
-        document.getElementById("sf_product").value = userData.product;
-        document.getElementById("sf_size").value =
-          document.getElementById("size").value;
-        document.getElementById("sf_locations").value =
-          document.getElementById("locations").value;
-
+        document.getElementById("sf_email").value = email;
+        document.getElementById("sf_company").value = company;
+        document.getElementById("sf_phone").value = mobile;
+        document.getElementById("sf_category").value = userData.category || "";
+        document.getElementById("sf_pos").value = userData.pos || "";
+        document.getElementById("sf_product").value = userData.product || "";
+        if (document.getElementById("sizeField").style.display !== "none") {
+          document.getElementById("sf_size").value = userData.size || 0;
+          document.getElementById("sf_locations").value = "";
+        } else if (
+          document.getElementById("locationsField").style.display !== "none"
+        ) {
+          document.getElementById("sf_locations").value =
+            userData.location || 0;
+          document.getElementById("sf_size").value = "";
+        }
         document.getElementById("hiddenSubmitForm").submit();
         alert("제출이 완료되었습니다!");
       }
-
       AOS.init();
     </script>
     <script>
@@ -286,43 +319,23 @@
         particles: {
           number: {
             value: 80,
-            density: {
-              enable: true,
-              value_area: 800,
-            },
+            density: { enable: true, value_area: 800 },
           },
-          color: {
-            value: "#0067A3",
-          },
+          color: { value: "#0067A3" },
           shape: {
             type: "circle",
-            stroke: {
-              width: 0,
-              color: "#000000",
-            },
-            polygon: {
-              nb_sides: 5,
-            },
+            stroke: { width: 0, color: "#000000" },
+            polygon: { nb_sides: 5 },
           },
           opacity: {
             value: 0.5,
             random: false,
-            anim: {
-              enable: false,
-              speed: 1,
-              opacity_min: 0.1,
-              sync: false,
-            },
+            anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false },
           },
           size: {
             value: 3,
             random: true,
-            anim: {
-              enable: false,
-              speed: 40,
-              size_min: 0.1,
-              sync: false,
-            },
+            anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
           },
           line_linked: {
             enable: true,
@@ -339,33 +352,18 @@
             straight: false,
             out_mode: "out",
             bounce: false,
-            attract: {
-              enable: false,
-              rotateX: 600,
-              rotateY: 1200,
-            },
+            attract: { enable: false, rotateX: 600, rotateY: 1200 },
           },
         },
         interactivity: {
           detect_on: "canvas",
           events: {
-            onhover: {
-              enable: true,
-              mode: "repulse",
-            },
-            onclick: {
-              enable: true,
-              mode: "push",
-            },
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
             resize: true,
           },
           modes: {
-            grab: {
-              distance: 400,
-              line_linked: {
-                opacity: 1,
-              },
-            },
+            grab: { distance: 400, line_linked: { opacity: 1 } },
             bubble: {
               distance: 400,
               size: 40,
@@ -373,16 +371,9 @@
               opacity: 8,
               speed: 3,
             },
-            repulse: {
-              distance: 200,
-              duration: 0.4,
-            },
-            push: {
-              particles_nb: 4,
-            },
-            remove: {
-              particles_nb: 2,
-            },
+            repulse: { distance: 200, duration: 0.4 },
+            push: { particles_nb: 4 },
+            remove: { particles_nb: 2 },
           },
         },
         retina_detect: true,
