@@ -223,6 +223,7 @@
         name="retURL"
         value="https://dreamorder-dev-ed.develop.my.site.com"
       />
+      <input type="hidden" id="sf_name" name="last_name" />
       <input type="hidden" id="sf_email" name="email" />
       <input type="hidden" id="sf_company" name="company" />
       <input type="hidden" id="sf_phone" name="mobile" />
@@ -293,6 +294,7 @@
           alert("모든 연락처 정보를 입력해주세요.");
           return;
         }
+        document.getElementById("sf_name").value = company + "의 리드";
         document.getElementById("sf_email").value = email;
         document.getElementById("sf_company").value = company;
         document.getElementById("sf_phone").value = mobile;
