@@ -152,19 +152,6 @@
         </button>
       </div>
 
-      <!-- Step 4: 매장 규모 또는 지점 수 입력 -->
-      <!-- <div id="step4" class="hidden">
-        <h2>4. 정보를 입력해주세요</h2>
-        <div id="sizeField" class="input-field">
-          <label for="size">매장 규모 (평수)</label>
-          <input type="text" id="size" placeholder="매장 규모 입력" />
-        </div>
-        <div id="locationsField" class="input-field">
-          <label for="locations">지점 수</label>
-          <input type="text" id="locations" placeholder="지점 수 입력" />
-        </div>
-        <button class="button" onclick="nextStep(5)">다음</button>
-      </div> -->
       <div id="step4" class="hidden">
         <h2>4. 정보를 입력해주세요</h2>
         <div id="sizeField">
@@ -193,7 +180,11 @@
 
       <!-- Step 5: 연락처 정보 입력 -->
       <div id="step5" class="hidden">
-        <h2>5. 연락처 정보를 입력해주세요</h2>
+        <h2>5. 고객님의 정보를 입력해주세요</h2>
+        <div class="input-field">
+          <label for="name">이름</label>
+          <input type="text" id="name" required />
+        </div>
         <div class="input-field">
           <label for="company">회사명</label>
           <input type="text" id="company" required />
@@ -288,6 +279,7 @@
 
       // Step 5: 제출 (숨겨진 폼에 값 채워서 제출)
       function submitForm() {
+        const name = document.getElementById("name").value;
         const company = document.getElementById("company").value;
         const mobile = document.getElementById("mobile").value;
         const email = document.getElementById("email").value;
@@ -295,7 +287,7 @@
           alert("모든 연락처 정보를 입력해주세요.");
           return;
         }
-        document.getElementById("sf_name").value = company;
+        document.getElementById("sf_name").value = name;
         document.getElementById("sf_email").value = email;
         document.getElementById("sf_company").value = company;
         document.getElementById("sf_phone").value = mobile;
