@@ -320,6 +320,9 @@
           alert("모든 연락처 정보를 입력해주세요.");
           return;
         }
+        if (typeof decibelInsight === "function") {
+          decibelInsight("sendTrackedEvent", "FormSubmitted");
+        }
         document.getElementById("sf_name").value = name;
         document.getElementById("sf_email").value = email;
         document.getElementById("sf_company").value = company;
