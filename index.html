@@ -34,7 +34,8 @@
         el.async = 1;
         el.src = i;
         it.parentNode.insertBefore(el, it);
-      })(
+      });
+      decibelInsight("sendTrackedEvent", "JunghoonSample")(
         window,
         document,
         "script",
