@@ -318,6 +318,7 @@
         const email = document.getElementById("email").value;
         if (!company || !mobile || !email) {
           alert("모든 연락처 정보를 입력해주세요.");
+          decibelInsight('sendApplicationError', dataLayer.errorMessage);
           return;
         }
         if (typeof decibelInsight === "function") {
