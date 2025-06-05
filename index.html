@@ -216,7 +216,12 @@
         <h2>5. 고객님의 정보를 입력해주세요</h2>
         <div class="input-field">
           <label for="name">이름</label>
-          <input type="text" id="name" required data-di-field-error="Please enter your name."/>
+          <input
+            type="text"
+            id="name"
+            required
+            data-di-field-error="Please enter your name."
+          />
         </div>
         <div class="input-field">
           <label for="company">회사명</label>
@@ -240,17 +245,35 @@
       action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DNS00000DWs2b"
       method="POST"
       style="display: none"
+      data-di-form-track
+      data-di-form-id="JunghoonSample"
     >
       <input type="hidden" name="oid" value="00DNS00000DWs2b" />
+      <input type="hidden" name="retURL" value="https://google.com" />
       <input
         type="hidden"
-        name="retURL"
-        value="https://dreamorder-dev-ed.develop.my.site.com"
+        id="sf_name"
+        name="last_name"
+        data-di-field-id="lastname"
       />
-      <input type="hidden" id="sf_name" name="last_name" />
-      <input type="hidden" id="sf_email" name="email" />
-      <input type="hidden" id="sf_company" name="company" />
-      <input type="hidden" id="sf_phone" name="mobile" />
+      <input
+        type="hidden"
+        id="sf_email"
+        name="email"
+        data-di-field-id="email"
+      />
+      <input
+        type="hidden"
+        id="sf_company"
+        name="company"
+        data-di-field-id="company"
+      />
+      <input
+        type="hidden"
+        id="sf_phone"
+        name="mobile"
+        data-di-field-id="mobile"
+      />
       <input type="hidden" id="sf_category" name="00NNS00000X7KTd" />
       <input type="hidden" id="sf_pos" name="00NNS00000X7Iy5" />
       <input type="hidden" id="sf_product" name="00NNS00000X7HxB" />
@@ -318,7 +341,7 @@
         const email = document.getElementById("email").value;
         if (!company || !mobile || !email) {
           alert("모든 연락처 정보를 입력해주세요.");
-          decibelInsight('sendApplicationError', dataLayer.errorMessage);
+          decibelInsight("sendApplicationError", dataLayer.errorMessage);
           return;
         }
         if (typeof decibelInsight === "function") {
