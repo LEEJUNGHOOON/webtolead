@@ -160,6 +160,11 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
       }
+      .error {
+        color: red;
+        margin-top: 8px;
+        font-size: 14px;
+      }
     </style>
   </head>
 
@@ -228,23 +233,48 @@
         <h2>5. 고객님의 정보를 입력해주세요</h2>
         <div class="input-field">
           <label for="name">이름</label>
-          <input type="text" id="name" required />
+          <input
+            type="text"
+            id="name"
+            required
+            data-di-field-id="last_name"
+            data-di-field-error="이름을 입력해주세요."
+          />
+          <span id="error-name" class="error" style="display: none"></span>
         </div>
         <div class="input-field">
           <label for="company">회사명</label>
-          <input type="text" id="company" required />
+          <input
+            type="text"
+            id="company"
+            required
+            data-di-field-id="company"
+            data-di-field-error="회사명을 입력해주세요."
+          />
+          <span id="error-company" class="error" style="display: none"></span>
         </div>
         <div class="input-field">
           <label for="mobile">전화번호</label>
-          <input type="tel" id="mobile" required />
+          <input
+            type="tel"
+            id="mobile"
+            required
+            data-di-field-id="mobile"
+            data-di-field-error="전화번호를 입력해주세요."
+          />
+          <span id="error-mobile" class="error" style="display: none"></span>
         </div>
         <div class="input-field">
           <label for="email">이메일</label>
-          <input type="email" id="email" required />
+          <input
+            type="email"
+            id="email"
+            required
+            data-di-field-id="email"
+            data-di-field-error="이메일을 입력해주세요."
+          />
+          <span id="error-email" class="error" style="display: none"></span>
         </div>
-        <p class="error" style="color: red; display: none">
-          모든 정보를 입력 해 주세요!!
-        </p>
         <button
           id="submittosalesforce"
           class="submitbutton"
@@ -271,26 +301,29 @@
         type="hidden"
         id="sf_name"
         name="last_name"
-        data-di-field-id="lastname"
-        data-di-field-error="Please enter your first name."
+        data-di-field-id="last_name"
+        data-di-field-error="이름을 입력해주세요."
       />
       <input
         type="hidden"
         id="sf_email"
         name="email"
         data-di-field-id="email"
+        data-di-field-error="이메일을 입력해주세요."
       />
       <input
         type="hidden"
         id="sf_company"
         name="company"
         data-di-field-id="company"
+        data-di-field-error="회사명을 입력해주세요."
       />
       <input
         type="hidden"
         id="sf_phone"
         name="mobile"
         data-di-field-id="mobile"
+        data-di-field-error="전화번호를 입력해주세요."
       />
       <input type="hidden" id="sf_category" name="00NNS00000X7KTd" />
       <input type="hidden" id="sf_pos" name="00NNS00000X7Iy5" />
@@ -345,20 +378,64 @@
 
       // Step 5: 제출 버튼 클릭 시 호출되는 함수
       function submitForm() {
-        const name = document.getElementById("name").value;
-        const company = document.getElementById("company").value;
-        const mobile = document.getElementById("mobile").value;
-        const email = document.getElementById("email").value;
-        if (!name || !company || !mobile || !email) {
-          alert("모든 연락처 정보를 입력해주세요.");
-          document.querySelector(".error").style.display = "block"; // 에러 메시지 보이기
-          decibelInsight("sendApplicationError", "got ya"); // 오류 이벤트 전송
-          return;
+        const nameEl = document.getElementById("name");
+        const companyEl = document.getElementById("company");
+        const mobileEl = document.getElementById("mobile");
+        const emailEl = document.getElementById("email");
+
+        const name = nameEl.value.trim();
+        const company = companyEl.value.trim();
+        const mobile = mobileEl.value.trim();
+        const email = emailEl.value.trim();
+
+        // 각 필드 유효성 검사: 빈 문자열이면 Decibel 오류 수집용 메시지 노출
+        let hasError = false;
+
+        if (!name) {
+          document.getElementById("error-name").textContent =
+            "이름을 입력해주세요.";
+          document.getElementById("error-name").style.display = "block";
+          hasError = true;
         } else {
-          document.querySelector(".error").style.display = "none"; // 완료
+          document.getElementById("error-name").style.display = "none";
         }
 
-        // 숨겨진 폼(hiddenSubmitForm)의 각 히든 필드에 값 채우기
+        if (!company) {
+          document.getElementById("error-company").textContent =
+            "회사명을 입력해주세요.";
+          document.getElementById("error-company").style.display = "block";
+          hasError = true;
+        } else {
+          document.getElementById("error-company").style.display = "none";
+        }
+
+        if (!mobile) {
+          document.getElementById("error-mobile").textContent =
+            "전화번호를 입력해주세요.";
+          document.getElementById("error-mobile").style.display = "block";
+          hasError = true;
+        } else {
+          document.getElementById("error-mobile").style.display = "none";
+        }
+
+        if (!email) {
+          document.getElementById("error-email").textContent =
+            "이메일을 입력해주세요.";
+          document.getElementById("error-email").style.display = "block";
+          hasError = true;
+        } else {
+          document.getElementById("error-email").style.display = "none";
+        }
+
+        // 하나라도 에러가 있으면 Decibel용 “sendApplicationError” 이벤트 전송하고 종료
+        if (hasError) {
+          if (typeof decibelInsight === "function") {
+            decibelInsight("sendApplicationError", "validation error");
+          }
+          return;
+        }
+
+        // 모든 필드 통과 시, 숨겨진 폼에 값 세팅
         document.getElementById("sf_name").value = name;
         document.getElementById("sf_email").value = email;
         document.getElementById("sf_company").value = company;
@@ -377,17 +454,17 @@
           document.getElementById("sf_size").value = "";
         }
 
-        // form.submit()을 호출하면, onsubmit 콜백(handleOnSubmit)이 먼저 실행됩니다.
+        // 폼 제출: onsubmit 콜백(handleOnSubmit)이 자동으로 먼저 실행됩니다.
         document.getElementById("hiddenSubmitForm").submit();
       }
 
       // hiddenSubmitForm이 실제로 제출되기 직전에 호출되는 콜백
       function handleOnSubmit() {
-        // 여기서 decibelInsight 호출을 실행합니다.
+        // Decibel “submit” 트래킹과 함께 sendTrackedEvent 전송
         if (typeof decibelInsight === "function") {
           decibelInsight("sendTrackedEvent", "JunghoonSample");
         }
-        // 콜백 내부에서는 return 값이 필요 없습니다. (폼 제출은 이미 진행 중)
+        // 별도 return 값 필요 없음 (전송은 계속 진행)
       }
 
       // DOMContentLoaded 이벤트 내부에서 AOS와 Particles.js 초기화
@@ -395,7 +472,7 @@
         // AOS 애니메이션 초기화
         AOS.init({
           duration: 1200,
-          once: true, // 스크롤 시 한 번만 애니메이션을 실행
+          once: true,
         });
 
         // Particles.js 초기화
