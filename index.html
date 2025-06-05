@@ -255,7 +255,7 @@
       </div>
     </div>
 
-    <!-- 숨겨진 Web-to-Lead 폼 -->
+    <!-- 숨겨진 Web-to-Lead 폼: onsubmit 안에서 decibelInsight 콜백 실행 -->
     <form
       id="hiddenSubmitForm"
       action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DNS00000DWs2b"
@@ -263,6 +263,7 @@
       style="display: none"
       data-di-form-track
       data-di-form-id="JunghoonSample"
+      onsubmit="handleOnSubmit()"
     >
       <input type="hidden" name="oid" value="00DNS00000DWs2b" />
       <input type="hidden" name="retURL" value="https://google.com" />
@@ -291,9 +292,6 @@
         name="mobile"
         data-di-field-id="mobile"
       />
-      <span class="error" data-di-field-error-for="mobile"
-        >Please enter your INFO.</span
-      >
       <input type="hidden" id="sf_category" name="00NNS00000X7KTd" />
       <input type="hidden" id="sf_pos" name="00NNS00000X7Iy5" />
       <input type="hidden" id="sf_product" name="00NNS00000X7HxB" />
@@ -345,7 +343,7 @@
         document.getElementById("step5").classList.remove("hidden");
       }
 
-      // Step 5: 제출 (숨겨진 폼에 값 채워서 제출)
+      // Step 5: 제출 버튼 클릭 시 호출되는 함수
       function submitForm() {
         const name = document.getElementById("name").value;
         const company = document.getElementById("company").value;
@@ -357,11 +355,10 @@
           decibelInsight("sendApplicationError", "got ya"); // 오류 이벤트 전송
           return;
         } else {
-          document.querySelector(".error").style.display = "none"; // 모든 필드 채워졌으면 에러 메시지 숨기기
+          document.querySelector(".error").style.display = "none"; // 완료
         }
-        if (typeof decibelInsight === "function") {
-          decibelInsight("sendTrackedEvent", "JunghoonSample");
-        }
+
+        // 숨겨진 폼(hiddenSubmitForm)의 각 히든 필드에 값 채우기
         document.getElementById("sf_name").value = name;
         document.getElementById("sf_email").value = email;
         document.getElementById("sf_company").value = company;
@@ -379,8 +376,18 @@
             userData.location || 0;
           document.getElementById("sf_size").value = "";
         }
+
+        // form.submit()을 호출하면, onsubmit 콜백(handleOnSubmit)이 먼저 실행됩니다.
         document.getElementById("hiddenSubmitForm").submit();
-        alert("제출이 완료되었습니다!");
+      }
+
+      // hiddenSubmitForm이 실제로 제출되기 직전에 호출되는 콜백
+      function handleOnSubmit() {
+        // 여기서 decibelInsight 호출을 실행합니다.
+        if (typeof decibelInsight === "function") {
+          decibelInsight("sendTrackedEvent", "JunghoonSample");
+        }
+        // 콜백 내부에서는 return 값이 필요 없습니다. (폼 제출은 이미 진행 중)
       }
 
       // DOMContentLoaded 이벤트 내부에서 AOS와 Particles.js 초기화
@@ -388,7 +395,7 @@
         // AOS 애니메이션 초기화
         AOS.init({
           duration: 1200,
-          once: true, // 스크롤 시 한 번만 애니메이션을 실행하고 싶다면 추가
+          once: true, // 스크롤 시 한 번만 애니메이션을 실행
         });
 
         // Particles.js 초기화
