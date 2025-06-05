@@ -261,6 +261,7 @@
         id="sf_name"
         name="last_name"
         data-di-field-id="lastname"
+        data-di-field-error="Please enter your first name."
       />
       <input
         type="hidden"
@@ -347,7 +348,6 @@
         const email = document.getElementById("email").value;
         if (!company || !mobile || !email) {
           alert("모든 연락처 정보를 입력해주세요.");
-          decibelInsight("sendApplicationError", dataLayer.errorMessage);
           return;
         }
         if (typeof decibelInsight === "function") {
