@@ -461,6 +461,7 @@
       // hiddenSubmitForm이 실제로 제출되기 직전에 호출되는 콜백
       function handleOnSubmit() {
         // Decibel “submit” 트래킹과 함께 sendTrackedEvent 전송
+        decibelInsight("formSubmitted", "#hiddenSubmitForm");
         if (typeof decibelInsight === "function") {
           decibelInsight("sendTrackedEvent", "JunghoonSample");
         }
